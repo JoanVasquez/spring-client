@@ -24,4 +24,10 @@ public class ClientDaoImpl implements IDao<Client> {
 		return em.createQuery("from Client").getResultList();
 	}
 
+	@Override
+	@Transactional
+	public void save(Client client) {
+		em.persist(client);
+	}
+
 }

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import com.spring.boot.data.jpa.models.dao.IDao;
 import com.spring.boot.data.jpa.models.entity.Client;
 
@@ -22,4 +21,11 @@ public class ClientController {
 		model.addAttribute("clients", iDao.findAll());
 		return "index";
 	}
+	
+	public String create(Model model) {
+		Client client = new Client();
+		model.addAttribute("client", client);
+		return "/";
+	}
+	
 }

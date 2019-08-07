@@ -1,0 +1,1 @@
+INSERT INTO tbl_clients (client_id, first_name, last_name, email, created_at) VALUES(1, 'Joan', 'Vasquez', 'test@test.com', '2019-07-08');

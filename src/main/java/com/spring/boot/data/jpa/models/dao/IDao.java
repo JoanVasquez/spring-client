@@ -6,4 +6,6 @@ public interface IDao<Entity> {
 
 	public List<Entity> findAll();
 
+	public void save(Entity entity);
+
 }
