@@ -37,7 +37,7 @@ public class DaoImpl<T> implements IDao<T> {
 	@Transactional(readOnly = true)
 	@Override
 	public T findById(String className, int id) throws ClassNotFoundException {
-		Class c = Class.forName("com.spring.boot.data.jpa.models.entity" + className);
+		Class c = Class.forName("com.spring.boot.data.jpa.models.entity."+className);
 		return (T) em.find(c, id);
 	}
 
