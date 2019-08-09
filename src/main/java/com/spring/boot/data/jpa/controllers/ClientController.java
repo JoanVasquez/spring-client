@@ -73,7 +73,7 @@ public class ClientController {
 
 	@ModelAttribute("clients")
 	public List<Client> getClients() {
-		return iService.findAll();
+		return iService.findAll("Client");
 	}
 
 }

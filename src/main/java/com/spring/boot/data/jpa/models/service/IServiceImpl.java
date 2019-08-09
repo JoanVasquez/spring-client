@@ -15,8 +15,8 @@ public class IServiceImpl<T> implements IService<T>{
 	private IDao<T> iDao;
 
 	@Override
-	public List<T> findAll() {
-		return iDao.findAll();
+	public List<T> findAll(String entity) {
+		return iDao.findAll(entity);
 	}
 
 	@Override

@@ -17,8 +17,8 @@ public class DaoImpl<T> implements IDao<T> {
 	@SuppressWarnings("unchecked")
 	@Transactional(readOnly = true)
 	@Override
-	public List<T> findAll() {
-		return em.createQuery("from Client").getResultList();
+	public List<T> findAll(String entity) {
+		return em.createQuery("from " + entity).getResultList();
 	}
 
 	@Transactional

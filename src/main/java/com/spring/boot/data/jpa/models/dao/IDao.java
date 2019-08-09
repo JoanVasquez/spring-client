@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IDao<Entity> {
 
-	public List<Entity> findAll();
+	public List<Entity> findAll(String entity);
 
 	public void save(Entity entity);
 	

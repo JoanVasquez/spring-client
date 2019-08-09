@@ -3,7 +3,7 @@ package com.spring.boot.data.jpa.models.service;
 import java.util.List;
 
 public interface IService<Entity> {
-	public List<Entity> findAll();
+	public List<Entity> findAll(String entity);
 
 	public void save(Entity entity);
 
