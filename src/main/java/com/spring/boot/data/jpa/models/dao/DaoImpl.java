@@ -1,4 +1,4 @@
-package com.spring.boot.data.jpa.models.dao;
+/*package com.spring.boot.data.jpa.models.dao;
 
 import java.util.List;
 
@@ -47,4 +47,4 @@ public class DaoImpl<T> implements IDao<T> {
 		em.remove(findById(className, id));
 	}
 
-}
+}*/

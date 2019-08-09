@@ -2,14 +2,19 @@ package com.spring.boot.data.jpa.models.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 public interface IService<Entity> {
-	public List<Entity> findAll(String entity);
+	
+	public List<Entity> findAll();
+	
+	public Page<Entity> findAll(Pageable pageable);
 
 	public void save(Entity entity);
 
-	public void update(Entity entity);
+	public Entity findById(Long id);
 
-	public Entity findById(String className, int id) throws ClassNotFoundException;
-
-	public void delete(String className, int id) throws ClassNotFoundException;
+	public void delete(Long id);
+	
 }

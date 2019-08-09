@@ -1,9 +1,13 @@
 package com.spring.boot.data.jpa.models.dao;
 
-import java.util.List;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-public interface IDao<Entity> {
+import com.spring.boot.data.jpa.models.entity.Client;
 
+//import java.util.List;
+
+public interface IDao extends PagingAndSortingRepository<Client, Long>{
+/*
 	public List<Entity> findAll(String entity);
 
 	public void save(Entity entity);
@@ -12,6 +16,6 @@ public interface IDao<Entity> {
 
 	public Entity findById(String className, int id) throws ClassNotFoundException;
 	
-	public void delete(String className, int id) throws ClassNotFoundException;
+	public void delete(String className, int id) throws ClassNotFoundException;*/
 
 }

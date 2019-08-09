@@ -1,0 +1,109 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <form
+      th:fragment="form-client"
+      method="POST"
+      th:action="@{/save}"
+      th:object="${client}"
+    >
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2 col-form-label" for="first-name"
+            >First Name</label
+          >
+          <div class="col-sm-6">
+            <input
+              type="text"
+              th:field="*{fName}"
+              class="form-control"
+              th:errorClass="'form-control alert-danger'"
+              id="first-name"
+              aria-describedby="First Name"
+              placeholder="Enter Your First Name"
+            />
+            <div
+              th:if="${#fields.hasErrors('fName')}"
+              class="alert alert-danger mt-2"
+              role="alert"
+            >
+              <span th:errors="*{fName}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2 col-form-label" for="last-name"
+            >Last Name</label
+          >
+          <div class="col-sm-6">
+            <input
+              type="text"
+              th:field="*{lName}"
+              class="form-control"
+              th:errorClass="'form-control alert-danger'"
+              id="last-name"
+              aria-describedby="Last Name"
+              placeholder="Enter Your Last Name"
+            />
+            <div
+              th:if="${#fields.hasErrors('lName')}"
+              class="alert alert-danger mt-2"
+              role="alert"
+            >
+              <span th:errors="*{lName}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2" for="email">Email</label>
+          <div class="col-sm-6">
+            <input
+              type="email"
+              th:field="*{email}"
+              class="form-control"
+              th:errorClass="'form-control alert-danger'"
+              id="email"
+              aria-describedby="Email"
+              placeholder="Enter Your Email"
+            />
+            <div
+              th:if="${#fields.hasErrors('email')}"
+              class="alert alert-danger mt-2"
+              role="alert"
+            >
+              <span th:errors="*{email}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <label class="col-sm-2" for="created-at">Created At</label>
+          <div class="col-sm-6">
+            <input
+              type="date"
+              th:field="*{createdAt}"
+              class="form-control"
+              th:errorClass="'form-control alert-danger'"
+              id="created-at"
+              aria-describedby="Created At"
+              placeholder="Created At"
+            />
+            <div
+              th:if="${#fields.hasErrors('createdAt')}"
+              class="alert alert-danger mt-2"
+              role="alert"
+            >
+              <span th:errors="*{createdAt}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--<input type="hidden" th:field="*{id}" />-->
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </body>
+</html>

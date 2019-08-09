@@ -1,169 +1,44 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    />
-    <title th:text="${title}"></title>
-  </head>
+  <head th:replace="layout/layout :: head"></head>
   <body>
     <div class="container">
       <div class="row">
+        <div
+          class="alert alert-success"
+          th:if="${success != null}"
+          th:text="${success}"
+        ></div>
+        <div
+          class="alert alert-danger"
+          th:if="${error != null}"
+          th:text="${error}"
+        ></div>
+        <div
+          class="alert alert-warning"
+          th:if="${warning != null}"
+          th:text="${warning}"
+        ></div>
+        <div
+          class="alert alert-info"
+          th:if="${info != null}"
+          th:text="${info}"
+        ></div>
         <div class="col-12 mt-5">
           <h3 class="text-info">Create a new Client</h3>
           <hr />
-          <form method="POST" th:action="@{/save}" th:object="${client}">
-            <div class="form-group">
-              <div class="row">
-                <label class="col-sm-2 col-form-label" for="first-name"
-                  >First Name</label
-                >
-                <div class="col-sm-6">
-                  <input
-                    type="text"
-                    th:field="*{fName}"
-                    class="form-control"
-                    th:errorClass="'form-control alert-danger'"
-                    id="first-name"
-                    aria-describedby="First Name"
-                    placeholder="Enter Your First Name"
-                  />
-                  <div
-                    th:if="${#fields.hasErrors('fName')}"
-                    class="alert alert-danger mt-2"
-                    role="alert"
-                  >
-                    <span th:errors="*{fName}"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <label class="col-sm-2 col-form-label" for="last-name"
-                  >Last Name</label
-                >
-                <div class="col-sm-6">
-                  <input
-                    type="text"
-                    th:field="*{lName}"
-                    class="form-control"
-                    th:errorClass="'form-control alert-danger'"
-                    id="last-name"
-                    aria-describedby="Last Name"
-                    placeholder="Enter Your Last Name"
-                  />
-                  <div
-                    th:if="${#fields.hasErrors('lName')}"
-                    class="alert alert-danger mt-2"
-                    role="alert"
-                  >
-                    <span th:errors="*{lName}"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <label class="col-sm-2" for="email">Email</label>
-                <div class="col-sm-6">
-                  <input
-                    type="email"
-                    th:field="*{email}"
-                    class="form-control"
-                    th:errorClass="'form-control alert-danger'"
-                    id="email"
-                    aria-describedby="Email"
-                    placeholder="Enter Your Email"
-                  />
-                  <div
-                    th:if="${#fields.hasErrors('email')}"
-                    class="alert alert-danger mt-2"
-                    role="alert"
-                  >
-                    <span th:errors="*{email}"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <label class="col-sm-2" for="created-at">Created At</label>
-                <div class="col-sm-6">
-                  <input
-                    type="date"
-                    th:field="*{createdAt}"
-                    class="form-control"
-                    th:errorClass="'form-control alert-danger'"
-                    id="created-at"
-                    aria-describedby="Created At"
-                    placeholder="Created At"
-                  />
-                  <div
-                    th:if="${#fields.hasErrors('createdAt')}"
-                    class="alert alert-danger mt-2"
-                    role="alert"
-                  >
-                    <span th:errors="*{createdAt}"></span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!--<input type="hidden" th:field="*{id}" />-->
-            <button type="submit" class="btn btn-primary">Save</button>
-          </form>
+          <form th:replace="layout/form :: form"></form>
         </div>
       </div>
       <div class="row ">
         <div class="col-12 mt-5">
           <h1 th:text="${title}"></h1>
-
-          <table class="table table-striped" th:if="${!clients.isEmpty()}">
-            <thead>
-              <tr>
-                <th scope="col">Id</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Created At</th>
-                <th scope="col">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr th:each="client : ${clients}">
-                <td th:text="${client.id}"></td>
-                <td th:text="${client.fName}"></td>
-                <td th:text="${client.lName}"></td>
-                <td th:text="${client.email}"></td>
-                <td th:text="${client.createdAt}"></td>
-                <td>
-                  <a th:href="@{/} + ${client.id}" class="btn btn-outline-dark">
-                    Edit
-                  </a>
-                  <a
-                    th:href="@{/delete/} + ${client.id}"
-                    class="btn btn-outline-danger"
-                  >
-                    Remove
-                  </a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <hr />
-          <h3 class="text-center text-info" th:if="${!!clients.isEmpty()}">
-            No Clients Found
-          </h3>
+          <table th:replace="layout/list :: list"></table>
+          <nav th:replace="layout/paginator :: paginator"></nav>
         </div>
       </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <footer th:replace="layout/layout :: footer"></footer>
   </body>
 </html>
