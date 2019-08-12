@@ -2,12 +2,17 @@ package com.spring.boot.data.jpa.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,10 +27,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "tbl_clients")
 public class Client implements Serializable {
 
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -41,10 +42,13 @@ public class Client implements Serializable {
 	@NotEmpty
 	private String lName;
 
-	@Column(name = "email", nullable = false, unique = true)
+	@Column(nullable = false, unique = true)
 	@NotEmpty
 	@Email
 	private String email;
+
+	@OneToMany(mappedBy = "client",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Bill> bills;
 
 	@Column(name = "created_at", nullable = false)
 	@Temporal(TemporalType.DATE)
@@ -53,6 +57,7 @@ public class Client implements Serializable {
 	private Date createdAt;
 
 	public Client() {
+		bills = new LinkedList<>();
 	}
 
 	public Client(Long id, String fName, String lName, String email, Date createdAt) {
@@ -62,7 +67,7 @@ public class Client implements Serializable {
 		this.email = email;
 		this.createdAt = createdAt;
 	}
-	
+
 	@PrePersist
 	public void prePersist() {
 		createdAt = new Date();
@@ -106,6 +111,18 @@ public class Client implements Serializable {
 
 	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
+	}
+
+	public List<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(List<Bill> bills) {
+		this.bills = bills;
+	}
+
+	public void addBill(Bill bill) {
+		bills.add(bill);
 	}
 
 }
